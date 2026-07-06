@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">👥</span>
+                    <div>
+                        <h1>Employee Management</h1>
+                        <p>Manage your team in one place</p>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" id="addEmployeeBtn">
+                    + Add Employee
+                </button>
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="stats-bar">
+                <div class="stat-card">
+                    <span class="stat-label">Total Employees</span>
+                    <span class="stat-value" id="employeeCount">0</span>
+                </div>
+            </section>
+
+            <section class="card table-card">
+                <div class="card-header">
+                    <h2>All Employees</h2>
+                    <button type="button" class="btn btn-ghost" id="refreshBtn">Refresh</button>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Employee ID</th>
+                                <th>Name</th>
+                                <th class="actions-col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                            <tr class="empty-row">
+                                <td colspan="3">No employees yet. Click "Add Employee" to get started.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-overlay hidden" id="employeeModal">
+        <div class="modal" role="dialog" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add Employee</h2>
+                <button type="button" class="icon-btn" id="closeModalBtn" aria-label="Close">&times;</button>
+            </div>
+            <form id="employeeForm">
+                <div class="form-group">
+                    <label for="employeeId">Employee ID</label>
+                    <input type="text" id="employeeId" name="employeeId" placeholder="e.g. E001" required>
+                </div>
+                <div class="form-group">
+                    <label for="employeeName">Full Name</label>
+                    <input type="text" id="employeeName" name="employeeName" placeholder="e.g. Jane Doe" required>
+                </div>
+                <p class="form-error hidden" id="formError"></p>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Save Employee</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast hidden" id="toast"></div>
+
+    <script src="/js/app.js"></script>
+</body>
+</html>
