@@ -6,6 +6,119 @@ A Spring Boot application for managing employees with a REST API and a web UI. Y
 
 ---
 
+## UI Preview
+
+The web UI is a single-page dashboard at `http://localhost:8080`. Below is a sample of what you see after adding a few employees.
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│  👥  Employee Management                        [ + Add Employee ]    │
+│      Manage your team in one place                                  │
+├─────────────────────────────────────────────────────────────────────┤
+│  Total Employees                                                    │
+│  3                                                                  │
+├─────────────────────────────────────────────────────────────────────┤
+│  All Employees                                      [ Refresh ]     │
+│  ┌─────────────┬──────────────────┬─────────────────────────────┐   │
+│  │ Employee ID │ Name             │ Actions                     │   │
+│  ├─────────────┼──────────────────┼─────────────────────────────┤   │
+│  │ E001        │ Jane Doe         │ [ Edit ]  [ Delete ]        │   │
+│  │ E002        │ John Smith       │ [ Edit ]  [ Delete ]        │   │
+│  │ E003        │ Alice Johnson    │ [ Edit ]  [ Delete ]        │   │
+│  └─────────────┴──────────────────┴─────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Add Employee modal (sample)
+
+When you click **+ Add Employee**, a popup form appears:
+
+```
+┌──────────────────────────────────┐
+│  Add Employee                 ✕  │
+├──────────────────────────────────┤
+│  Employee ID                     │
+│  [ E004________________ ]        │
+│                                  │
+│  Full Name                       │
+│  [ Bob Wilson__________ ]        │
+│                                  │
+│         [ Cancel ] [ Save Employee ] │
+└──────────────────────────────────┘
+```
+
+After saving, the table updates and a toast shows: **"Employee added successfully"**.
+
+---
+
+## Sample Demo (Try It Yourself)
+
+Follow this quick demo to see the full UI in action.
+
+### Step 1 — Start the app
+
+```bash
+mvn spring-boot:run
+```
+
+Open [http://localhost:8080](http://localhost:8080). You should see an empty table with the message: *"No employees yet. Click Add Employee to get started."*
+
+### Step 2 — Load sample employees (optional)
+
+Run these commands in a new terminal to pre-fill sample data:
+
+```bash
+curl -X POST http://localhost:8080/api/employees \
+  -H "Content-Type: application/json" \
+  -d '{"employeeId":"E001","employeeName":"Jane Doe"}'
+
+curl -X POST http://localhost:8080/api/employees \
+  -H "Content-Type: application/json" \
+  -d '{"employeeId":"E002","employeeName":"John Smith"}'
+
+curl -X POST http://localhost:8080/api/employees \
+  -H "Content-Type: application/json" \
+  -d '{"employeeId":"E003","employeeName":"Alice Johnson"}'
+```
+
+Refresh the browser. The UI should now show **3 employees** in the table.
+
+### Step 3 — Add an employee from the UI
+
+| Field | Sample value |
+|-------|--------------|
+| Employee ID | `E004` |
+| Full Name | `Bob Wilson` |
+
+Click **Save Employee**. Total count becomes **4**.
+
+### Step 4 — Edit an employee
+
+1. Click **Edit** on row `E002` (John Smith)
+2. Change name to `John Smith Jr.`
+3. Click **Save Employee**
+
+The table updates instantly. Employee ID stays `E002`.
+
+### Step 5 — Delete an employee
+
+1. Click **Delete** on row `E003` (Alice Johnson)
+2. Confirm the dialog
+
+Row is removed. Total count becomes **3**. Toast shows: **"Employee deleted successfully"**.
+
+### What the UI does (summary)
+
+| Action | What you click | Result |
+|--------|----------------|--------|
+| View all | Open home page | Table lists every employee |
+| Add | **+ Add Employee** → fill form → **Save** | New row appears |
+| Edit | **Edit** on a row → change name → **Save** | Name updates in table |
+| Delete | **Delete** on a row → confirm | Row removed |
+| Refresh | **Refresh** button | Reloads data from server |
+
+---
+
 ## Features
 
 - Add new employees
